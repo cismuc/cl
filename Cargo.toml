@@ -1,0 +1,20 @@
+[package]
+name = "discord_bot"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+twilight-gateway = "0.16"
+twilight-http = "0.16"
+twilight-model = "0.16"
+tokio = { version = "1.40", features = ["macros", "rt-multi-thread", "signal"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+dotenvy = "0.15"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
