@@ -31,13 +31,13 @@ jobs:
             use_cross: true
 
           # macOS ARM64 (Apple Silicon)
-          - os: macos-14
+          - os: macos-latest
             target: aarch64-apple-darwin
             binary_name: discord_bot
             use_cross: false
 
-          # macOS x86_64 (Intel)
-          - os: macos-13
+          # macOS x86_64 (Intel) - built directly on macOS Apple Silicon runner via target cross-compile
+          - os: macos-latest
             target: x86_64-apple-darwin
             binary_name: discord_bot
             use_cross: false
@@ -67,7 +67,7 @@ jobs:
         if: matrix.use_cross
         run: cargo install cross --git https://github.com/cross-rs/cross
 
-      - name: Build binary (native)
+      - name: Build binary (native or cross-target)
         if: ${{ !matrix.use_cross }}
         run: cargo build --release --target ${{ matrix.target }}
 
